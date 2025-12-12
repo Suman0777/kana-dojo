@@ -1,6 +1,6 @@
 'use client';
 import { Link, useRouter, usePathname } from '@/core/i18n/routing';
-import { House, Sparkles, TrendingUp, Trophy } from 'lucide-react';
+import { House, Leaf, Sparkles, TrendingUp, Trophy } from 'lucide-react';
 import clsx from 'clsx';
 import { useClick } from '@/shared/hooks/useAudio';
 import { useEffect, useRef } from 'react';
@@ -12,7 +12,7 @@ const Sidebar = () => {
   const pathname = usePathname();
   const pathWithoutLocale = removeLocaleFromPath(pathname);
 
-  const hotkeysOn = usePreferencesStore(state => state.hotkeysOn);
+  const hotkeysOn = usePreferencesStore((state) => state.hotkeysOn);
 
   const { playClick } = useClick();
 
@@ -39,7 +39,7 @@ const Sidebar = () => {
 
   return (
     <div
-      id='main-sidebar'
+      id="main-sidebar"
       className={clsx(
         'flex lg:flex-col lg:items-start lg:gap-2',
         'lg:w-1/5 lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto',
@@ -57,13 +57,13 @@ const Sidebar = () => {
           'max-lg:hidden max-3xl:flex-col max-3xl:items-start'
         )}
       >
-        <span className='font-bold'>KanaDojo</span>
+        <span className="font-bold">KanaDojo</span>
         <span className={clsx('font-normal text-[var(--secondary-color)]')}>
           かな道場️
         </span>
       </h1>
       <Link
-        href='/'
+        href="/"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:p-3 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/'
@@ -72,11 +72,11 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        <House className='' />
-        <span className='max-lg:hidden'>Home</span>
+        <House className="" />
+        <span className="max-lg:hidden">Home</span>
       </Link>
       <Link
-        href='/kana'
+        href="/kana"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl  lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/kana'
@@ -85,11 +85,11 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        あ<span className='max-lg:hidden'>Kana</span>
+        あ<span className="max-lg:hidden">Kana</span>
       </Link>
 
       <Link
-        href='/vocabulary'
+        href="/vocabulary"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/vocabulary'
@@ -98,10 +98,10 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        語<span className='max-lg:hidden'> Vocabulary</span>
+        語<span className="max-lg:hidden"> Vocabulary</span>
       </Link>
       <Link
-        href='/kanji'
+        href="/kanji"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/kanji'
@@ -110,10 +110,10 @@ const Sidebar = () => {
         )}
         onClick={playClick}
       >
-        字<span className='max-lg:hidden'> Kanji</span>
+        字<span className="max-lg:hidden"> Kanji</span>
       </Link>
       <Link
-        href='/progress'
+        href="/progress"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/progress'
@@ -123,10 +123,10 @@ const Sidebar = () => {
         onClick={playClick}
       >
         <TrendingUp />
-        <span className='max-lg:hidden'>Progress</span>
+        <span className="max-lg:hidden">Progress</span>
       </Link>
       <Link
-        href='/achievements'
+        href="/achievements"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/achievements'
@@ -136,10 +136,10 @@ const Sidebar = () => {
         onClick={playClick}
       >
         <Trophy />
-        <span className='max-lg:hidden'>Achievements</span>
+        <span className="max-lg:hidden">Achievements</span>
       </Link>
       <Link
-        href='/preferences'
+        href="/preferences"
         className={clsx(
           'text-2xl  duration-250 transition-all lg:py-2 lg:px-4 max-lg:px-3 max-lg:py-2 rounded-xl lg:w-full flex max-lg:justify-center items-center gap-2',
           pathWithoutLocale === '/preferences'
@@ -154,7 +154,24 @@ const Sidebar = () => {
             pathWithoutLocale !== '/preferences' && 'motion-safe:animate-bounce'
           )}
         />
-        <span className='max-lg:hidden'>Preferences</span>
+        <span className="max-lg:hidden">Preferences</span>
+      </Link>
+
+      <div className="max-lg:hidden w-full mt-3 px-4 text-xs font-semibold uppercase text-[var(--secondary-color)] opacity-70">
+        Experiments
+      </div>
+      <Link
+        href="/zen"
+        className={clsx(
+          'max-lg:hidden text-xl duration-250 transition-all py-2 px-4 rounded-xl w-full flex items-center gap-2',
+          pathWithoutLocale === '/zen'
+            ? 'text-[var(--main-color)] bg-[var(--border-color)] lg:bg-[var(--card-color)]'
+            : 'hover:bg-[var(--card-color)] text-[var(--secondary-color)]'
+        )}
+        onClick={playClick}
+      >
+        <Leaf />
+        <span>Zen</span>
       </Link>
     </div>
   );
