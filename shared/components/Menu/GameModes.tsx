@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useKanaStore from '@/features/Kana/store/useKanaStore';
 import useKanjiStore from '@/features/Kanji/store/useKanjiStore';
 import useVocabStore from '@/features/Vocabulary/store/useVocabStore';
@@ -16,6 +16,7 @@ import { useClick } from '@/shared/hooks/useAudio';
 import { useShallow } from 'zustand/react/shallow';
 import { Link, useRouter } from '@/core/i18n/routing';
 import { formatLevelsAsRanges } from '@/shared/lib/helperFunctions';
+import { ActionButton } from '@/shared/components/ui/ActionButton';
 
 interface GameModesProps {
   isOpen: boolean;
@@ -32,6 +33,34 @@ const GameModes = ({
 }: GameModesProps) => {
   const { playClick } = useClick();
   const router = useRouter();
+
+  const durationStorageKey =
+    currentDojo === 'kana'
+      ? 'timedChallengeDuration'
+      : currentDojo === 'kanji'
+        ? 'timedKanjiChallengeDuration'
+        : 'timedVocabChallengeDuration';
+
+  const DURATION_OPTIONS = [30, 60, 90, 120, 180];
+
+  const [challengeDuration, setChallengeDuration] = useState<number>(60);
+
+  const persistDuration = useCallback(
+    (duration: number) => {
+      if (typeof window === 'undefined') return;
+      localStorage.setItem(durationStorageKey, duration.toString());
+    },
+    [durationStorageKey]
+  );
+
+  useEffect(() => {
+    if (!isOpen || mode !== 'blitz') return;
+    if (typeof window === 'undefined') return;
+
+    const saved = localStorage.getItem(durationStorageKey);
+    const parsed = saved ? parseInt(saved) : NaN;
+    setChallengeDuration(Number.isFinite(parsed) ? parsed : 60);
+  }, [isOpen, mode, durationStorageKey, persistDuration]);
 
   const { selectedGameModeKana, setSelectedGameModeKana, kanaGroupIndices } =
     useKanaStore(
@@ -184,6 +213,9 @@ const GameModes = ({
       }
       if (e.key === 'Enter' && selectedGameMode) {
         playClick();
+        if (mode === 'blitz') {
+          persistDuration(challengeDuration);
+        }
         router.push(
           mode === 'blitz' ? `/${currentDojo}/blitz` : `/${currentDojo}/train`
         );
@@ -199,7 +231,17 @@ const GameModes = ({
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [isOpen, onClose, selectedGameMode, currentDojo, playClick, router, mode]);
+  }, [
+    isOpen,
+    onClose,
+    selectedGameMode,
+    currentDojo,
+    playClick,
+    router,
+    mode,
+    challengeDuration,
+    persistDuration
+  ]);
 
   const gameModes = [
     {
@@ -327,6 +369,40 @@ const GameModes = ({
             })}
           </div>
 
+          {mode === 'blitz' && (
+            <div className="bg-[var(--card-color)] rounded-lg p-4 space-y-3">
+              <p className="text-sm font-medium text-[var(--secondary-color)]">
+                Duration:
+              </p>
+              <div className="flex gap-2 justify-center flex-wrap">
+                {DURATION_OPTIONS.map(duration => (
+                  <ActionButton
+                    key={duration}
+                    onClick={() => {
+                      playClick();
+                      setChallengeDuration(duration);
+                      persistDuration(duration);
+                    }}
+                    colorScheme={
+                      challengeDuration === duration ? 'main' : 'secondary'
+                    }
+                    borderColorScheme={
+                      challengeDuration === duration ? 'main' : 'secondary'
+                    }
+                    borderBottomThickness={6}
+                    borderRadius="2xl"
+                    className={clsx(
+                      'px-4 py-2 w-auto ',
+                      challengeDuration !== duration && 'opacity-60'
+                    )}
+                  >
+                    {duration < 60 ? `${duration}s` : `${duration / 60}m`}
+                  </ActionButton>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Action Buttons */}
           <div className="flex flex-row items-center justify-center gap-2 md:gap-4 w-full max-w-4xl mx-auto">
             <button
@@ -360,6 +436,9 @@ const GameModes = ({
                   return;
                 }
                 playClick();
+                if (mode === 'blitz') {
+                  persistDuration(challengeDuration);
+                }
               }}
             >
               <button

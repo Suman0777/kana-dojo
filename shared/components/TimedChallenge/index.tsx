@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  useEffect,
-  useLayoutEffect,
-  useState,
-  useRef,
-  useCallback,
-} from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useChallengeTimer } from '@/shared/hooks/useTimer';
 import { useGoalTimers } from '@/shared/hooks/useGoalTimers';
 import { useSmartReverseMode } from '@/shared/hooks/useSmartReverseMode';
@@ -48,18 +42,14 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
     renderOption,
     getCorrectOption,
     supportsReverseMode,
-    stats,
+    stats
   } = config;
-
-  // Track if user cancelled (to show PreGameScreen after cancel even with initialGameMode)
-  const [wasCancelled, setWasCancelled] = useState(false);
-  const hasAutoStarted = useRef(false);
 
   // Smart reverse mode
   const {
     isReverse,
     decideNextMode,
-    recordWrongAnswer: resetReverseStreak,
+    recordWrongAnswer: resetReverseStreak
   } = useSmartReverseMode();
 
   // Game mode state - use initialGameMode if provided (from store), otherwise use localStorage
@@ -127,7 +117,7 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
     context: goalTimerContext,
     onGoalReached: goal => {
       console.log(`🎯 Goal reached: ${goal.label} at ${elapsedTime}s`);
-    },
+    }
   });
 
   // Refs for stable callbacks
@@ -195,32 +185,12 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
         inputRef.current.focus();
         inputRef.current.scrollIntoView({
           behavior: 'smooth',
-          block: 'center',
+          block: 'center'
         });
       }
     }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [items, gameMode]);
-
-  // Auto-start effect when initialGameMode is provided (coming from GameModes modal)
-  // Use useLayoutEffect to run synchronously before paint, eliminating flash
-  useLayoutEffect(() => {
-    if (initialGameMode && !hasAutoStarted.current && items.length > 0) {
-      hasAutoStarted.current = true;
-      // Start game immediately (no setTimeout delay) to prevent flash
-      playClick();
-      stats.reset();
-      setIsFinished(false);
-      setUserAnswer('');
-      setLastAnswerCorrect(null);
-      setWrongSelectedAnswers([]);
-      setCurrentQuestion(generateQuestionRef.current(items));
-      goalTimers.resetGoals();
-      resetTimer();
-      startTimer(); // Start immediately, no delay
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialGameMode, items.length]);
 
   const handleCancel = () => {
     playClick();
@@ -229,7 +199,6 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
     setUserAnswer('');
     setLastAnswerCorrect(null);
     setWrongSelectedAnswers([]);
-    setWasCancelled(true);
   };
 
   const handleSubmit = (e?: React.FormEvent) => {
@@ -297,16 +266,10 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
 
   // Render states
   if (items.length === 0) {
-    return (
-      <EmptyState
-        dojoType={dojoType}
-        dojoLabel={dojoLabel}
-      />
-    );
+    return <EmptyState dojoType={dojoType} dojoLabel={dojoLabel} />;
   }
 
-  // Skip PreGameScreen when auto-starting (initialGameMode provided and not cancelled)
-  if (!isRunning && !isFinished && !(initialGameMode && !wasCancelled)) {
+  if (!isRunning && !isFinished) {
     return (
       <PreGameScreen
         dojoType={dojoType}
@@ -324,7 +287,7 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
           goals: goalTimers.goals,
           addGoal: goalTimers.addGoal,
           removeGoal: goalTimers.removeGoal,
-          clearGoals: goalTimers.clearGoals,
+          clearGoals: goalTimers.clearGoals
         }}
         onStart={handleStart}
       />
@@ -339,7 +302,7 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
         stats={{
           correct: stats.correct,
           wrong: stats.wrong,
-          bestStreak: stats.bestStreak,
+          bestStreak: stats.bestStreak
         }}
         showGoalTimers={showGoalTimers}
         goals={goalTimers.goals}
@@ -372,7 +335,7 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
       stats={{
         correct: stats.correct,
         wrong: stats.wrong,
-        streak: stats.streak,
+        streak: stats.streak
       }}
       showGoalTimers={showGoalTimers}
       elapsedTime={elapsedTime}
@@ -382,7 +345,7 @@ export default function TimedChallenge<T>({ config }: TimedChallengeProps<T>) {
         removeGoal: goalTimers.removeGoal,
         clearGoals: goalTimers.clearGoals,
         nextGoal: goalTimers.nextGoal,
-        progressToNextGoal: goalTimers.progressToNextGoal,
+        progressToNextGoal: goalTimers.progressToNextGoal
       }}
       onCancel={handleCancel}
     />
