@@ -6,8 +6,10 @@ import useCrazyModeStore from '@/features/CrazyMode/store/useCrazyModeStore';
 import { usePathname } from 'next/navigation';
 import { ScrollRestoration } from 'next-scroll-restoration';
 import WelcomeModal from '@/shared/components/Modals/WelcomeModal';
-import { AchievementNotificationContainer } from '@/shared/components/achievements/AchievementNotification';
-import AchievementIntegration from '@/shared/components/achievements/AchievementIntegration';
+import {
+  AchievementNotificationContainer,
+  AchievementIntegration
+} from '@/features/Achievements/components';
 import { applyTheme } from '@/features/Preferences/data/themes';
 import BackToTop from '@/shared/components/navigation/BackToTop';
 import MobileBottomBar from '@/shared/components/layout/BottomBar';

@@ -1,24 +1,40 @@
-// Main component export
-export { default } from './AchievementProgress';
+/**
+ * Achievement Components - Main Barrel Export
+ *
+ * Structure:
+ * - global/     - App-wide components (used in ClientLayout)
+ * - progress/   - Achievement progress page components
+ * - _unused/    - Experimental/unused components
+ */
 
-// Sub-component exports for potential reuse
-export { AchievementCard } from './AchievementCard';
-export type { AchievementCardProps } from './AchievementCard';
+// Global components (app-wide, used in ClientLayout)
+export {
+  AchievementIntegration,
+  AchievementNotification,
+  AchievementNotificationContainer
+} from './global';
 
-export { AchievementManagement } from './AchievementManagement';
+// Progress page components
+export {
+  AchievementProgress,
+  AchievementCard,
+  AchievementManagement,
+  HeroSection,
+  CategoryTabs,
+  AchievementGrid,
+  useAchievementProgress,
+  rarityConfig,
+  categories
+} from './progress';
 
-export { HeroSection } from './HeroSection';
-export type { HeroSectionProps } from './HeroSection';
+// Types
+export type {
+  AchievementCardProps,
+  HeroSectionProps,
+  CategoryTabsProps,
+  AchievementGridProps,
+  CategoryId
+} from './progress';
 
-export { CategoryTabs } from './CategoryTabs';
-export type { CategoryTabsProps } from './CategoryTabs';
-
-export { AchievementGrid } from './AchievementGrid';
-export type { AchievementGridProps } from './AchievementGrid';
-
-// Hook export
-export { useAchievementProgress } from './useAchievementProgress';
-
-// Constants export
-export { rarityConfig, categories } from './constants';
-export type { CategoryId } from './constants';
+// Default export (main page component)
+export { AchievementProgress as default } from './progress';

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import SimpleProgress from './SimpleProgress';
 import StreakProgress from './StreakProgress';
-import AchievementProgress from '@/features/Achievements/components/AchievementProgress';
+import AchievementProgress from '@/features/Achievements/components';
 import { TrendingUp, Flame, Trophy } from 'lucide-react';
 import { useClick } from '@/shared/hooks/useAudio';
 import SidebarLayout from '@/shared/components/layout/SidebarLayout';

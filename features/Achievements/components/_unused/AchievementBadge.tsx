@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 import { Trophy } from 'lucide-react';
-import { useAchievements } from '@/features/Achievements/hooks/useAchievements';
+import { useAchievements } from '../../hooks/useAchievements';
 import { useClick } from '@/shared/hooks/useAudio';
 
 interface AchievementBadgeProps {
