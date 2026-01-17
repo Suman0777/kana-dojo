@@ -65,6 +65,7 @@ module.exports = {
     checklist: {
       title: '**Pre-merge checklist:**',
       items: [
+        'You starred our repo ⭐',
         'Code follows project style guidelines',
         'Changes have been tested locally',
         'PR title is descriptive',
@@ -143,6 +144,7 @@ module.exports = {
           'Fork this repository',
           'Make the changes described above',
           'Submit a Pull Request linking to this issue (use `Closes #{issueNumber}`)',
+          "Star our repo ⭐ and drink some delicious bubble tea 🍹",
           'Wait for review!'
         ]
       },
