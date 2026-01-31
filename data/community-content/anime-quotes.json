@@ -224,11 +224,37 @@
   "anime": "JoJo's Bizarre Adventure: Stone Ocean",
   "character": "Jolyne Cujoh"
 },
+{
+  "japanese": "オレ様の美技にブギウギ",
+  "romaji": "Ore-sama no bigi ni bugiugi",
+  "english": "Dance to my beautiful technique!",
+  "anime": "The Prince of Tennis",
+  "character": "Keigo Atobe"
+},
   {
   "japanese": "だが…それがいい。",
   "romaji": "Daga... sore ga ii.",
   "english": "But... that's what I like.",
   "anime": "JoJo's Bizarre Adventure: Diamond is Unbreakable",
   "character": "Yoshikage Kira"
+},
+{
+  "japanese": "諦めないってばよ!",
+  "romaji": "Akiramenai tte bayo!",
+  "english": "I never give up, believe it!",
+  "anime": "Naruto",
+  "character": "Naruto Uzumaki"
+  "japanese": "オレ様の美技にブギウギ",
+  "romaji": "Ore-sama no bigi ni bugiugi",
+  "english": "Dance to my beautiful technique!",
+  "anime": "The Prince of Tennis",
+  "character": "Keigo Atobe"
+},
+{
+  "japanese": "痛みを伴わない教訓には意味がない",
+  "romaji": "Itami o tomonawanai kyoukun ni wa imi ga nai",
+  "english": "A lesson without pain is meaningless.",
+  "anime": "Fullmetal Alchemist: Brotherhood",
+  "character": "Edward Elric"
 }
 ]

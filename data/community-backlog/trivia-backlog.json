@@ -751,7 +751,7 @@
       "Origami"
     ],
     "correctIndex": 0,
-    "issued": false
+    "issued": true
   },
   {
     "id": 59,
@@ -764,7 +764,7 @@
       "Hiroshima"
     ],
     "correctIndex": 0,
-    "issued": false
+    "issued": true
   },
   {
     "id": 60,
@@ -777,7 +777,7 @@
       "Torin"
     ],
     "correctIndex": 0,
-    "issued": false
+    "issued": true
   },
   {
     "id": 61,
@@ -790,7 +790,7 @@
       "Fukuoka"
     ],
     "correctIndex": 0,
-    "issued": false
+    "issued": true
   },
   {
     "id": 62,

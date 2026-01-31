@@ -312,17 +312,17 @@
   {
     "id": 63,
     "text": "\"〜に比べて\" means \"compared to...\".",
-    "issued": false
+    "issued": true
   },
   {
     "id": 64,
     "text": "\"〜によると\" means \"according to...\".",
-    "issued": false
+    "issued": true
   },
   {
     "id": 65,
     "text": "\"〜に応じて\" means \"depending on...\".",
-    "issued": false
+    "issued": true
   },
   {
     "id": 66,
